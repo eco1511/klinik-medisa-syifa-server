@@ -10,13 +10,14 @@ let daftarSchema = mongoose.Schema({
     },
 
     //vitalSign
+    
     tensiDarah: {
         type: String
     } ,
     suhu: {
         type: String
     },
-    RespiratoryRate: {
+    respiratoryRate: {
         type: String
     },
 

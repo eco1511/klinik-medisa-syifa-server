@@ -9,6 +9,7 @@ const moment = require("moment"); // moment date
 var dashboardRouter = require('./app/dashboard/router');
 var pasienRouter = require('./app/pasien/router');
 var layananRouter = require('./app/layanan/router');
+var daftarRouter = require('./app/daftar/router');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/adminlte', express.static(path.join(__dirname, '/node_modules/admin-lt
 app.use('/', dashboardRouter);
 app.use('/pasien', pasienRouter);
 app.use('/layanan', layananRouter);
+app.use('/daftar', daftarRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

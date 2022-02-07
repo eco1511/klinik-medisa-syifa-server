@@ -1,0 +1,89 @@
+
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Form Pendaftaran</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Tambah</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Form Pendaftaran</h3>
+                  </div>
+                  <form action="/voucher/create" method="POST" enctype="multipart/form-data" >
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Nama Pasien</label>
+                        <select class="form-control select2" style="width: 100%;" name="category" required>
+                          <option selected="selected">- pilih Pasien -</option>
+                          <% pasien.forEach(pasien=>{ %>
+                            <option value="<%= pasien._id %>"><%=  pasien.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="usia">Usia</label>
+                        <input type="text" name="usia" class="form-control" id="usia" placeholder="Masukan Usia Pasien" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="alergi">Alergi</label>
+                        <input type="text" name="alergi" class="form-control" id="alergi" placeholder="Masukan Alergi Pasien" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="tensiDarah">Tensi Darah</label>
+                        <input type="text" name="tensiDarah" class="form-control" id="tensiDarah" placeholder="Masukan Tensi Darah Pasien" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="suhu">Suhu Tubuh</label>
+                        <input type="text" name="suhu" class="form-control" id="suhu" placeholder="Masukan Suhu Tubuh Pasien" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="respiratoryRate">RR (Respiratory Rate)</label>
+                        <input type="text" name="respiratoryRate" class="form-control" id="respiratoryRate" placeholder="Masukan Respiratory Rate Pasien" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Jenis Layanan</label>
+                        <select class="form-control select2" style="width: 100%;" name="category" required>
+                          <option selected="selected">- pilih Layanan -</option>
+                          <% layanan.forEach(layanan=>{ %>
+                            <option value="<%= layanan._id %>"><%=  layanan.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+</div>
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>
