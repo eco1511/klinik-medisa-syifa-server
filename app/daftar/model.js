@@ -5,12 +5,19 @@ let daftarSchema = mongoose.Schema({
         type: Number,
     },
 
-    height: {
-        type: Number,
+    alergi: {
+        type: String
     },
 
-    weight: {
-        type: Number,
+    //vitalSign
+    tensiDarah: {
+        type: String
+    } ,
+    suhu: {
+        type: String
+    },
+    RespiratoryRate: {
+        type: String
     },
 
     pasien: [{
