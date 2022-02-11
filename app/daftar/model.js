@@ -6,25 +6,25 @@ let daftarSchema = mongoose.Schema({
     },
 
     alergi: {
-        type: String
+        type: String,
     },
 
     //vitalSign
     
     tensiDarah: {
-        type: String
+        type: String,
     } ,
     suhu: {
-        type: String
+        type: String,
     },
     respiratoryRate: {
-        type: String
+        type: String,
     },
 
-    pasien: [{
+    pasien: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Pasien'
-    }],
+    },
 
     layanan: {
         type: mongoose.Schema.Types.ObjectId,

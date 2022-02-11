@@ -32,11 +32,11 @@
                   <div class="card-header">
                     <h3 class="card-title">Form Pendaftaran</h3>
                   </div>
-                  <form action="/voucher/create" method="POST" enctype="multipart/form-data" >
+                  <form action="/daftar/create" method="POST" >
                     <div class="card-body">
                       <div class="form-group">
                         <label>Nama Pasien</label>
-                        <select class="form-control select2" style="width: 100%;" name="category" required>
+                        <select class="form-control select2" style="width: 100%;" name="pasien" required>
                           <option selected="selected">- pilih Pasien -</option>
                           <% pasien.forEach(pasien=>{ %>
                             <option value="<%= pasien._id %>"><%=  pasien.name %></option>
@@ -65,7 +65,7 @@
                       </div>
                       <div class="form-group">
                         <label>Jenis Layanan</label>
-                        <select class="form-control select2" style="width: 100%;" name="category" required>
+                        <select class="form-control select2" style="width: 100%;" name="layanan" required>
                           <option selected="selected">- pilih Layanan -</option>
                           <% layanan.forEach(layanan=>{ %>
                             <option value="<%= layanan._id %>"><%=  layanan.name %></option>

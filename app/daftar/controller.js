@@ -48,7 +48,7 @@ module.exports = {
                 
                 await daftar.save();
 
-                res.redirect('/daftar');
+                res.redirect('/');
             
         }catch(err){
             console.log(err);
@@ -59,87 +59,55 @@ module.exports = {
         try {
             const { id } = req.params
 
-            const voucher = await Voucher.findOne({_id : id})
-            .populate('category')
-            .populate('nominals')
-            const category = await Category.find();
-            const nominal = await Nominal.find();
+            const daftar = await Daftar.findOne({_id : id})
+            .populate([
+                {
+                path: 'pasien',
+                select: 'name tgllahir'
+                }
+            ])
+            .populate('layanan')
 
-            res.render('admin/voucher/edit', {
-                 voucher,
-                 category,
-                 nominal,
-                 name: req.session.user.name,
-                title: 'Halaman Ubah Voucher'
+            const pasien = await Pasien.find();
+            console.log(pasien);
+            const layanan = await Layanan.find();
+
+            res.render('admin/daftar/edit', {
+                usia,
+                alergi,
+                tensiDarah,
+                suhu,
+                respiratoryRate,
+                pasien,
+                layanan
             });
+
         } catch (err) {
-            req.flash('alertMessage', `${err.message}`);
-            req.flash('alertStatus', 'danger');
-            res.redirect('/voucher');
+            console.log(err)
         }
     },
 
     actionEdit : async(req, res) => {
         try {
             const { id } = req.params;
-            const { name, category, nominals } = req.body;
+            const { usia, alergi, tensiDarah, suhu, respiratoryRate, pasien, layanan } = req.body;
 
-            if(req.file){
-                let tmp_path = req.file.path;
-                let originaExt = req.file.originalname.split('.')[req.file.originalname.split('.').length - 1];
-                let filename = req.file.filename + '.' + originaExt;
-                let target_path = path.resolve(config.rootPath, `public/uploads/${filename}`);
-
-                const src = fs.createReadStream(tmp_path)
-                const dest = fs.createWriteStream(target_path)
-
-                src.pipe(dest)
-
-                src.on('end', async () => {
-                    try {
-                        const voucher = await Voucher.findOne({_id: id})
-
-                        let currentImage = `${config.rootPath}/public/uploads/${voucher.thumbnail}`
-                        if(fs.existsSync(currentImage)){
-                            fs.unlinkSync(currentImage)
-                        }
-
-                        await Voucher.findOneAndUpdate({
-                            _id: id
-                        }, {
-                            name,
-                            category,
-                            nominals,
-                            thumbnail: filename
-                        })
-
-                        req.flash('alertMessage', "Berhasil tambah Voucher")
-                        req.flash('alertStatus', "success")
-                        res.redirect('/voucher');
-                    } catch (err) {
-                        req.flash('alertMessage', `${err.message}`);
-                        req.flash('alertStatus', 'danger');
-                        res.redirect('/voucher');
-                    }
-                })
-            }else{
-                await Voucher.findOneAndUpdate({
+            
+                await Daftar.findOneAndUpdate({
                     _id: id
                 }, {
-                    name,
-                    category,
-                    nominals,
+                    usia,
+                    alergi,
+                    tensiDarah,
+                    suhu,
+                    respiratoryRate,
+                    pasien,
+                    layanan
                 })
 
-                req.flash('alertMessage', "Berhasil tambah Voucher");
-                req.flash('alertStatus', "success");
-
-                res.redirect('/voucher');
-            }
+                res.redirect('/daftar');
         } catch (err) {
-            req.flash('alertMessage', `${err.message}`);
-            req.flash('alertStatus', 'danger');
-            res.redirect('/voucher');
+            console.log(err);
         }
     },
 
