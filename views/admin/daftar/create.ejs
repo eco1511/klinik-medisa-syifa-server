@@ -36,7 +36,7 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Nama Pasien</label>
-                        <select class="form-control select2" style="width: 100%;" name="pasien" required>
+                        <select class="form-control select2" style="width: 100%;" name="pasien" id="pasien" required>
                           <option selected="selected">- pilih Pasien -</option>
                           <% pasien.forEach(pasien=>{ %>
                             <option value="<%= pasien._id %>"><%=  pasien.name %></option>

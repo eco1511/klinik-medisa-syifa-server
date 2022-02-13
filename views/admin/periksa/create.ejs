@@ -1,0 +1,107 @@
+
+<%- include ../../partials/header.ejs %>
+<%- include ../../partials/navbar.ejs %>
+<%- include ../../partials/sidebar.ejs %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Form Pemeriksaan</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Tambah</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Form Rekam Medis</h3>
+                  </div>
+                  <form action="/periksa/create" method="POST" >   
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">ID</label>
+                            <p><%= daftar.pasien.idPasien %></p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Nama Pasien</label>
+                            <p><%= daftar.pasien.name %></p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Usia</label>
+                            <p><%= daftar.usia %> Tahun</p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Jenis Kelamin</label>
+                            <p><%= daftar.pasien.jenis %></p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Alergi</label>
+                            <p><%= daftar.alergi %></p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Tensi Darah</label>
+                            <p><%= daftar.tensiDarah %></p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Suhu Tubuh</label>
+                            <p><%= daftar.suhu %> &#8451;</p>
+                          </div>
+                          <div class="form-group col-sm-3">
+                            <label for="idPasien">Respiratory Rate (RR)</label>
+                            <p><%= daftar.respiratoryRate %></p>
+                          </div>
+                        </div>
+                      
+                      <div class="form-group">
+                        <label for="usia">Anamnesa</label>
+                        <textarea type="text" name="anamnesa" class="form-control" id="usia" placeholder="Masukan Anamnesa" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="alergi">Diagnosa</label>
+                        <textarea type="text" name="diagnosa" class="form-control" id="alergi" placeholder="Masukan Diagnosa" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="tensiDarah">Therapy</label>
+                        <textarea type="text" name="therapy" class="form-control" id="tensiDarah" placeholder="Masukan Therapi" required></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="tensiDarah">Keterangan</label>
+                        <textarea type="text" name="keterangan" class="form-control" id="tensiDarah" placeholder="Masukan Keterangan"></textarea>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary" onclick="proses()" >Proses</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+</div>
+<%- include ../../partials/footer.ejs %>
+<%- include ../../partials/js.ejs %>
+<script>
+  function proses() {
+    alert('berhasil di proses');
+  }
+</script>

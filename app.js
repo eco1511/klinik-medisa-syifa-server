@@ -10,6 +10,7 @@ var dashboardRouter = require('./app/dashboard/router');
 var pasienRouter = require('./app/pasien/router');
 var layananRouter = require('./app/layanan/router');
 var daftarRouter = require('./app/daftar/router');
+var periksaRouter = require('./app/periksa/router');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/', dashboardRouter);
 app.use('/pasien', pasienRouter);
 app.use('/layanan', layananRouter);
 app.use('/daftar', daftarRouter);
+app.use('/periksa', periksaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

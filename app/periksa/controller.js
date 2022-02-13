@@ -1,4 +1,5 @@
-const Daftar = require('./model');
+const Periksa = require('./model');
+const Daftar = require('../daftar/model');
 const Pasien = require('../pasien/model');
 const Layanan = require('../layanan/model');
 module.exports = {
@@ -18,12 +19,15 @@ module.exports = {
     
     viewCreate : async(req, res) => {
         try{
-            const pasien = await Pasien.find();
-            const layanan = await Layanan.find();
+            const { id } = req.params
+            const daftar = await Daftar.findOne({_id: id})
+            .populate('pasien')
+            .populate('layanan')
 
-            res.render('admin/daftar/create', {
-                pasien,
-                layanan,
+            //console.log(daftar);
+
+            res.render('admin/periksa/create', {
+                daftar
             })
         }catch(err){
             console.log(err)
@@ -32,23 +36,24 @@ module.exports = {
 
     actionCreate : async(req,res) => {
         try{
-            const { usia, alergi, tensiDarah, suhu, respiratoryRate, pasien, layanan  } = req.body
+            const daftar = await Daftar.findOne()
+            //console.log(daftar);
 
-                const daftar = new Daftar({
-                    usia,
-                    alergi,
-                    tensiDarah,
-                    suhu,
-                    respiratoryRate,
-                    pasien,
-                    layanan,
+            const { anamnesa, diagnosa, therapy, keterangan } = req.body
+
+                const periksa = new Periksa({
+                    anamnesa,
+                    diagnosa,
+                    therapy,
+                    keterangan,
+                    daftar
                 })
                 
-                //console.log(daftar);
+                //console.log(periksa);
                 
-                await daftar.save();
+                await periksa.save();
 
-                res.redirect('/');
+                res.redirect('/daftar');
             
         }catch(err){
             console.log(err);
@@ -60,12 +65,7 @@ module.exports = {
             const { id } = req.params
 
             const daftar = await Daftar.findOne({_id : id})
-            .populate([
-                {
-                path: 'pasien',
-                select: 'name tgllahir'
-                }
-            ])
+            .populate('pasien')
             .populate('layanan')
 
             const pasien = await Pasien.find();
@@ -118,26 +118,6 @@ module.exports = {
                 _id : id
             });
             res.redirect('/daftar'); 
-        } catch (err) {
-            console.log(err)
-        }
-    },
-
-    actionStatus : async(req, res) => {
-        try {
-            const { id } = req.params;
-
-            const daftar = await Daftar.findOne({_id: id})
-
-            let status = daftar.status === 'Y' ? 'N' : 'Y';
-
-            await Daftar.findOneAndUpdate({
-                _id: id
-            }, {
-                status
-            })
-            res.redirect('/daftar'); 
-            
         } catch (err) {
             console.log(err)
         }

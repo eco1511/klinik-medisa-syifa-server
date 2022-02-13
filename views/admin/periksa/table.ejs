@@ -1,0 +1,35 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>ID</th>
+    <th>Nama</th>
+    <th>Layanan</th>
+    <th>Usia</th>
+    <th>Alergi</th>
+    <th>Tensi Darah</th>
+    <th>Aksi</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0 ; i < daftar.length; i++) { %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= daftar[i].pasien.idPasien %></td>
+        <td><%= daftar[i].pasien.name %></td>
+        <td><%= daftar[i].layanan.name %></td>
+        <td><%= daftar[i].usia %></td>
+        <td><%= daftar[i].alergi %></td>
+        <td><%= daftar[i].tensiDarah %></td>
+        <td>
+          <form action="" method="POST">
+            <a href="/periksa/create/<%= daftar[i]._id %>" class="btn btn-warning btn-xs">
+              <i class="fas fa-pencil-alt"></i>
+              Proses</a>
+          </form>
+          
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>

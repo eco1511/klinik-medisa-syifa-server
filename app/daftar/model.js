@@ -21,6 +21,12 @@ let daftarSchema = mongoose.Schema({
         type: String,
     },
 
+    status: {
+        type: String,
+        enum: ['Y', 'N'],
+        default: 'Y'
+    },
+
     pasien: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Pasien'
