@@ -1,36 +1,45 @@
 <table id="example2" class="table table-bordered table-hover">
     <thead>
     <tr>
-      <th>No.</th>
-      <th>ID</th>
-      <th>Nama</th>
+      <th>Tgl.Registrasi</th>
+      <th>Data Pasien</th>
       <th>Layanan</th>
-      <th>Usia</th>
-      <th>Alergi</th>
-      <th>Tensi Darah</th>
+      <th>Vital Sign</th>
       <th>Aksi</th>
     </tr>
     </thead>
     <tbody>
       <% for(let i = 0 ; i < daftar.length; i++) { %>
         <tr>
-          <% if(daftar[i].status === 'Y') { %>
-          <td><%= i + 1 %></td>
-          <td><%= daftar[i].pasien.idPasien %></td>
-          <td><%= daftar[i].pasien.name %></td>
+          
+          <td><%= moment(daftar[i].createAt).format('DD/MM/YYYY') %></td>
+          <td><b>ID Pasien:</b> <i><%= daftar[i].pasien.idPasien %></i> 
+              <br>
+              <b>Nama: </b> <i><%= daftar[i].pasien.name %></i> 
+              <br>
+              <b>Usia:</b>  <i><%= daftar[i].usia %> Tahun</i> 
+          </td>
           <td><%= daftar[i].layanan.name %></td>
-          <td><%= daftar[i].usia %></td>
-          <td><%= daftar[i].alergi %></td>
-          <td><%= daftar[i].tensiDarah %></td>
+          <td>Alergi: <%= daftar[i].alergi %>
+              <br>
+              Tensi Darah: <%= daftar[i].tensiDarah %>
+          </td>
           <td>
-            <form action="" method="POST">
-                <a href="/periksa/create/<%= daftar[i]._id %> " class="btn btn-warning btn-xs">
+            <form action="/daftar/status/<%= daftar[i]._id %>?_method=PUT" method="POST" method="POST">
+              <% if(daftar[i].status === 'Y') { %>  
+              <a href="/periksa/create/<%= daftar[i]._id %> " class="btn btn-warning btn-xs">
                 <i class="fas fa-pencil-alt"></i>
                 Proses</a>
+                <button class="btn btn-xs">
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+                <%} else { %>
+                  <a class="btn btn-success btn-xs">
+                  Selesai</a>
+                  <% } %>
+
             </form>
           </td>
-          <%} else { %>
-          <% } %>
         </tr>
       <% } %>
     </tbody>
